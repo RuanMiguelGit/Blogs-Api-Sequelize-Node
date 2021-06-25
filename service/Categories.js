@@ -8,6 +8,12 @@ if (message) return { message, code };
     return { data };
 };
 
+const getCategory = async () => {
+       const data = await Categorie.findAll();
+        return data;
+    };
+
 module.exports = {
     createCategory,
+    getCategory,
 };
