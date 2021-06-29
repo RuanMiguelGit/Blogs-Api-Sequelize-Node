@@ -7,6 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const UserController = require('./controller/User');
 const CategoriesController = require('./controller/Categorie.js');
+const PostsController = require('./controller/Posts');
 
 const auth = require('./middleware/auth');
 
@@ -16,10 +17,10 @@ app.get('/', (request, response) => {
 });
 
 app.post('/user', UserController.createUser);
-app.get('/user', auth, UserController.getUser);
+app.get('/user', UserController.getUser);
 app.get('/user/:id', auth, UserController.getUserById);
 app.post('/login', UserController.userLogin);
 app.post('/categories', auth, CategoriesController.createCategory);
 app.get('/categories', auth, CategoriesController.getCategory);
-
+app.post('/post', auth, PostsController.createPost);
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

@@ -51,6 +51,7 @@ const loginUservalidator = async (email, password) => {
         code: 400,
     }; 
 }
+console.log('aqui está o data', data.id);
     return {};
 };
 
@@ -59,8 +60,16 @@ const generateLoginToken = async (email) => {
         expiresIn: '7d',
         algorithm: 'HS256',
       };
+      const info = await User.findOne({
+        where: { email },
+    })
     
-      const token = await jwt.sign({ data: email }, secret, jwtConfig);
+    .then((res) => res.id)
+    .catch((err) => err);
+   console.log('aqui está o info', info);
+    const id = info;
+
+      const token = await jwt.sign({ data: id }, secret, jwtConfig);
       return { token };
 };
 
