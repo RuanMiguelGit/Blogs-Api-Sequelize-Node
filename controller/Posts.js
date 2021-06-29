@@ -16,6 +16,12 @@ const createPost = async (req, res) => {
     });
 };
 
+const getPost = async (req, res) => {
+const data = await PostsService.getPost();
+return res.status(200).json(data);
+};
+
 module.exports = {
     createPost,
+    getPost,
 };
