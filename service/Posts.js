@@ -1,4 +1,5 @@
 const { BlogPosts, PostsCategories, Categorie, User } = require('../models');
+const UpdateSchema = require('../Schemas/updatePostValidator');
 
 const createPost = async (title, content, user) => {
     const data = await
@@ -33,9 +34,25 @@ const getPostById = async (id) => {
     return data;
 };
 
+const updatePost = async (id, { title, content, categoryIds }) => {
+    const { message, code } = await UpdateSchema.validateEdit({ categoryIds, title, content });
+    if (message) return { message, code };
+    const data = await BlogPosts.update(
+        { title, content },
+        { where: { id } },
+)
+.then(() => BlogPosts.findOne({
+        where: { id },
+        include: [ 
+        { model: Categorie, as: 'categories', through: { attributes: [] } }],
+    }));
+return { data };
+};
+
 module.exports = {
     createPost,
     createPostCategories,
     getPost,
     getPostById,
+    updatePost,
 };
