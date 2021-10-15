@@ -50,7 +50,13 @@
   <ul>
   <li> Git Clone no Projeto</li>
   <li> Npm Install</li>
-  <li> Npm start</li>
+   <li> Adicionar os seguintes dados dentro do arquivo .env</li>
+   <ol>
+    <li>host: process.env.HOSTNAME</li>
+  <li>user: process.env.MYSQL_USER</li>
+     <li>password: process.env.MYSQL_PASSWORD</li>
+   </ol>
+    <li> Npm start</li>
  </ul>
  </ol>
 
